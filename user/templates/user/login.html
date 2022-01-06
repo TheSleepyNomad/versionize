@@ -1,0 +1,46 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versionize</title>
+    <link rel="stylesheet" href="{% static 'css/auth.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fontawesome_5.15.4/css/all.min.css' %}">
+</head>
+<body>
+    <main class="container">
+        <div class="form-wrapper">
+            <div class="form-wrapper__logo">
+                <img src="{% static 'img/logo.png' %}" alt="">
+            </div>
+            <form action="" class="auth-form">
+                <div class="auth-form__group">
+                    <label for="" class="auth-form__label">Эл. почта</label>
+                    <input type="email" class="auth-form__control" placeholder="Эл. почта">
+                </div>
+                <div class="auth-form__group">
+                    <label for="" class="auth-form__label">Пароль</label>
+                    <input type="password" class="auth-form__control" placeholder="Пароль">
+                </div>
+                <div class="auth-form__group">
+                    <select name="course" class="auth-form__select">
+                        <option selected="" value="Russian">Russian</option>
+                        <option value="English">English</option>
+                    </select>
+                </div>
+                <div class="auth-form__group">
+                    <input type="checkbox" name="remember">
+                    <label for="remember">Запомнить меня</label>
+                </div>
+                <div class="auth-form__group">
+                    <button type="submit" class="auth-form__button">Войти</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
