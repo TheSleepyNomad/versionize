@@ -1,24 +1,26 @@
+from django.contrib import auth
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
-def index(request): return render(request, 'user/base.html')
+from user.forms import UserLoginForm
 
 
 def login(request):
-    # if request.method == 'POST':
-    #     form = UserLoginForm(data=request.POST)
-    #     if form.is_valid():
-    #         username = request.POST['username']
-    #         password = request.POST['password']
-    #         user = auth.authenticate(username=username, password=password)
-    #         if user and user.is_active:
-    #             auth.login(request, user)
-    #             return HttpResponseRedirect(reverse('index'))
-    # else:
-    #     form = UserLoginForm()
-    # context = {'title': 'Login',
-    #            'form': form}
-    return render(request, 'user/login.html')
-    # , context)
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            email = request.POST['email']
+            password = request.POST['password']
+            user = auth.authenticate(username=email, password=password)
+            if user and user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect(reverse('lk'))
+    else:
+        form = UserLoginForm()
+    context = {'title': 'Login',
+               'form': form}
+    return render(request, 'user/login.html', context)
 
 
 def lk(request):

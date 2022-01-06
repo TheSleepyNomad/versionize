@@ -17,15 +17,16 @@
                 <div class="form-wrapper__logo">
                     <img src="{% static 'img/logo.png' %}" alt="">
                 </div>
-                <form action="" class="auth-form">
+                <form action="{% url 'user:login' %}" class="auth-form" method="post">
+                    {% csrf_token %}
                     <div class="auth-form__group">
-                        <label for="" class="auth-form__label">Эл. почта</label>
-                        <input type="email" class="auth-form__control" placeholder="Эл. почта">
+                        <label for="{{ form.email.id_for_label }}" class="auth-form__label">Эл. почта</label>
                     </div>
+                    {{ form.email }}
                     <div class="auth-form__group">
-                        <label for="" class="auth-form__label">Пароль</label>
-                        <input type="password" class="auth-form__control" placeholder="Пароль">
+                        <label for="{{ form.password.id_for_label }}" class="auth-form__label">Пароль</label>
                     </div>
+                    {{ form.password }}
                     <div class="auth-form__group">
                         <select name="course" class="auth-form__select">
                             <option selected="" value="Russian">Russian</option>
