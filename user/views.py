@@ -19,3 +19,7 @@ def login(request):
     #            'form': form}
     return render(request, 'user/login.html')
     # , context)
+
+
+def lk(request):
+    return render(request, 'user/lk.html')

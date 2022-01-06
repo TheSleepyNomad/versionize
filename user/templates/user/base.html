@@ -7,384 +7,239 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Versionize</title>
+    <title>
+        {% block title %}
+            Versionize
+        {% endblock %}
+    </title>
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <!--  -->
+
     <link rel="stylesheet" href="{% static 'css/base.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    {% block css %}
+
+    {% endblock %}
 </head>
 
 <body>
-    <div class="wrapper">
+<div class="wrapper">
+    <!-- ! Этот элемент можно использовать в base.html -->
+    <header class="header">
+        <nav class="header__nav">
+            <div class="header__left-section">
+                <!-- Лого -->
+                <i class='bx bxl-tux'></i>
+                <p>Задачи</p>
+                <p>Документы</p>
+                <p>Справочники</p>
+                <p>Помощь</p>
+            </div>
+            <div class="header__right-section">
+                <i class='bx bx-search'></i>
+                <div class="header__user-profile">
+                    <a class="nav-link" href="{% url 'user:lk' %}"><i class='bx bx-user-circle'></i>
+                        <span>Панков И. В.</span></a>
+                </div>
+                <i class='bx bx-windows'></i>
+                <a class="nav-link" href="{% url 'user:login' %}"><i class='bx bx-exit'></i></a>
+            </div>
+        </nav>
+    </header>
+    <!-- ! Конец -->
+    <main class="workspace">
         <!-- ! Этот элемент можно использовать в base.html -->
-        <header class="header">
-            <nav class="header__nav">
-                <div class="header__left-section">
-                    <!-- Лого -->
-                    <i class='bx bxl-tux'></i>
-                    <p>Задачи</p>
-                    <p>Документы</p>
-                    <p>Справочники</p>
-                    <p>Помощь</p>
-                </div>
-                <div class="header__right-section">
-                    <i class='bx bx-search'></i>
-                    <div class="header__user-profile">
-                        <i class='bx bx-user-circle'></i>
-                        <span>Панков И. В.</span>
+        <!-- Сайд меню -->
+        <nav class="sidebar-nav">
+            <ul class="sidebar-nav__list">
+                <li>
+                    <a href="#" id="btn" class="arrow">
+                        <i class='bx bx-folder'></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="btn">
+                        <i class='bx bx-calendar'></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="btn">
+                        <i class='bx bx-star'></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="btn">
+                        <i class='bx bx-time-five'></i>
+                    </a>
+
+                </li>
+                <li>
+                    <a href="#" id="btn">
+                        <i class='bx bx-grid-alt'></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sub-menu">
+            <div>
+                <div class="sub-menu-top">
+                    <div class="sub-menu-top__list-title">
+                        <span>Папки действий</span>
+                        <i class='bx bx-chevron-left'></i>
                     </div>
-                    <i class='bx bx-windows'></i>
-                    <a class="nav-link" href="{% url 'user:login' %}"><i class='bx bx-exit'></i></a>
+                    <ul class="sub-menu-top__list">
+                        <li>
+                            <div class="sub-menu-top__list-child" id="tasks">
+                                <i class='bx bx-chevron-right'></i>
+                                <span>Задачи</span>
+                            </div>
+                            <ul class="sub-menu-top__sub-list" id="task">
+                                <li>Черновики</li>
+                                <li>Возврат от исполнителя</li>
+                                <li>Назначенные</li>
+                                <li>В работе</li>
+                                <li>Для контроля</li>
+                                <li>Наблюдаемые</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="sub-menu-top__list-child" id="docs">
+                                <i class='bx bx-chevron-right'></i>
+                                <span>Документы</span>
+                            </div>
+                            <ul class="sub-menu-top__sub-list" id="doc">
+                                <li>Черновики</li>
+                                <li>Доработка</li>
+                                <li>Ознакомление</li>
+                                <li>Подготовка</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="sub-menu-top__list-child" id="chancellery">
+                                <i class='bx bx-chevron-right'></i>
+                                <span>Канцелярия</span>
+                            </div>
+                            <ul class="sub-menu-top__sub-list" id="chancery">
+                                <li>Обработка писем</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="sub-menu-top__list-title">
+                        <span>Папки поиска</span>
+                    </div>
+                    <ul class="sub-menu-top__list">
+                        <li>
+                            <div class="sub-menu-top__list-child" id="my_tasks">
+                                <i class='bx bx-chevron-right'></i>
+                                <span>Все мои задачи</span>
+                            </div>
+                            <ul class="sub-menu-top__sub-list" id="my_task">
+                                <li>Поставленные мной</li>
+                                <li>Полученные</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="sub-menu-top__list-child" id="my_docs">
+                                <i class='bx bx-chevron-right'></i>
+                                <span>Все мои документы</span>
+                            </div>
+                            <ul class="sub-menu-top__sub-list" id="my_doc">
+                                <li>Согласованные мной</li>
+                                <li>Утвержденные мной</li>
+                                <li>После ознакомления</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="sub-menu-top__list-child" id="my_contracts">
+                                <i class='bx bx-chevron-right'></i>
+                                <span>Все мои договора</span>
+                            </div>
+                            <ul class="sub-menu-top__sub-list" id="my_contract">
+                                <li>Согласованные мной</li>
+                                <li>Утвержденные мной</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-        </header>
+            </div>
+            <div class="sub-menu__other">
+                <i class='bx bx-calendar'></i>
+                <i class='bx bx-star'></i>
+                <i class='bx bx-time-five'></i>
+                <i class='bx bx-grid-alt'></i>
+            </div>
+        </div>
         <!-- ! Конец -->
-        <main class="workspace">
-            <!-- ! Этот элемент можно использовать в base.html -->
-            <!-- Сайд меню -->
-            <nav class="sidebar-nav">
-                <ul class="sidebar-nav__list">
-                    <li>
-                        <a href="#" id="btn" class="arrow">
-                            <i class='bx bx-folder'></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" id="btn">
-                            <i class='bx bx-calendar'></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" id="btn">
-                            <i class='bx bx-star'></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" id="btn">
-                            <i class='bx bx-time-five'></i>
-                        </a>
+        <!-- Рабочее пространство -->
+        {% block content %}
 
-                    </li>
-                    <li>
-                        <a href="#" id="btn">
-                            <i class='bx bx-grid-alt'></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="sub-menu">
-                <div>
-                    <div class="sub-menu-top">
-                        <div class="sub-menu-top__list-title">
-                            <span>Папки действий</span>
-                            <i class='bx bx-chevron-left'></i>
-                        </div>
-                        <ul class="sub-menu-top__list">
-                            <li>
-                                <div class="sub-menu-top__list-child" id="tasks">
-                                    <i class='bx bx-chevron-right'></i>
-                                    <span>Задачи</span>
-                                </div>
-                                <ul class="sub-menu-top__sub-list" id="task">
-                                    <li>Черновики</li>
-                                    <li>Возврат от исполнителя</li>
-                                    <li>Назначенные</li>
-                                    <li>В работе</li>
-                                    <li>Для контроля</li>
-                                    <li>Наблюдаемые</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="sub-menu-top__list-child" id="docs">
-                                    <i class='bx bx-chevron-right'></i>
-                                    <span>Документы</span>
-                                </div>
-                                <ul class="sub-menu-top__sub-list" id="doc">
-                                    <li>Черновики</li>
-                                    <li>Доработка</li>
-                                    <li>Ознакомление</li>
-                                    <li>Подготовка</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="sub-menu-top__list-child" id="chancellery">
-                                    <i class='bx bx-chevron-right'></i>
-                                    <span>Канцелярия</span>
-                                </div>
-                                <ul class="sub-menu-top__sub-list" id="chancery">
-                                    <li>Обработка писем</li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <div class="sub-menu-top__list-title">
-                            <span>Папки поиска</span>
-                        </div>
-                        <ul class="sub-menu-top__list">
-                            <li>
-                                <div class="sub-menu-top__list-child" id="my_tasks">
-                                    <i class='bx bx-chevron-right'></i>
-                                    <span>Все мои задачи</span>
-                                </div>
-                                <ul class="sub-menu-top__sub-list" id="my_task">
-                                    <li>Поставленные мной</li>
-                                    <li>Полученные</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="sub-menu-top__list-child" id="my_docs">
-                                    <i class='bx bx-chevron-right'></i>
-                                    <span>Все мои документы</span>
-                                </div>
-                                <ul class="sub-menu-top__sub-list" id="my_doc">
-                                    <li>Согласованные мной</li>
-                                    <li>Утвержденные мной</li>
-                                    <li>После ознакомления</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="sub-menu-top__list-child" id="my_contracts">
-                                    <i class='bx bx-chevron-right'></i>
-                                    <span>Все мои договора</span>
-                                </div>
-                                <ul class="sub-menu-top__sub-list" id="my_contract">
-                                    <li>Согласованные мной</li>
-                                    <li>Утвержденные мной</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="sub-menu__other">
-                    <i class='bx bx-calendar'></i>
-                    <i class='bx bx-star'></i>
-                    <i class='bx bx-time-five'></i>
-                    <i class='bx bx-grid-alt'></i>
-                </div>
-            </div>
-            <!-- ! Конец -->
-            <!-- Рабочее пространство -->
-            <div class="desktop">
-                <!-- Todo Сюда можно добвлять контент с других страниц -->
-                <div class="desktop__title">
-                    <h3>Илья Владимирович, добро пожаловать в систему Versionize</h3>
-                </div>
-                <!-- ! Конец -->
-                <div class="desktop__workspace">
-                    <input type="date">
-                    <div class="desktop__actions">
-                        <div class="desktop__action">
-                            <a href="#">
-                                <img src="{% static 'img/task_big.png' %}" alt="{% static 'contract_big.png' %}">
-                                <span>Создать задачу</span>
-                            </a>
-                        </div>
-                        <div class="desktop__action">
-                            <a href="#">
-                                <img src="{% static 'img/document_big.png' %}" alt="{% static 'contract_big.png' %}">
-                                <span>Создать документ</span>
-                            </a>
-                        </div>
-                        <div class="desktop__action">
-                            <a href="#">
-                                <img src="{% static 'img/contract_big.png' %}" alt="{% static 'contract_big.png' %}">
-                                <span>Создать договор</span>
-                            </a>
-                        </div>
-                        <div class="desktop__action">
-                            <a href="#">
-                                <img src="{% static 'img/meeting_big.png' %}" alt="{% static 'contract_big.png' %}">
-                                <span>Создать совещание</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="desktop__ivents">
-                    <!-- Если нет событий, то уведомляем обычной надписью -->
-                    <p>Нет событий</p>
-                    <!-- Если для пользователя есть события, то выводим их -->
-                    <div class="desktop__ivents-content">
-                        <div class="desktop__ivents-top-row">
-                            <div class="desktop__ivents-date">Сегодня</div>
-                            <!-- ? Возможно стоит вывести выше и в отдельный блок -->
-                            <div class="desktop__ivents-pagination">1-5 строки из n <i class='bx bx-chevron-left'></i><i
-                                    class='bx bx-chevron-right'></i></div>
-                        </div>
-                        <div class="desktop__ivents-body">
-                            <div class="desktop__ivents-message">
-                                <div class="desktop__ivents-message-title">Установить обновление для системы
-                                    [НомерЗадачи]</div>
-                                <div class="desktop__ivents-message-text">Установить обновление для системы</div>
-                            </div>
-                            <div class="desktop__ivents-info">
-                                <div class="desktop__ivents-info-date">До 31.12.2021 18:00</div>
-                                <!-- Todo сделать выпадающий список из статусов -->
-                                <div class="desktop__ivents-info-status">В работе <i class='bx bx-chevron-down'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desktop__ivents-top-row">
-                            <div class="desktop__ivents-date">Завтра</div>
-                            <!-- ? Возможно стоит вывести выше и в отдельный блок
-                            <div class="desktop__ivents-pagination">1-5 строки из n <i class='bx bx-chevron-left' ></i><i class='bx bx-chevron-right' ></i></div> -->
-                        </div>
-                        <div class="desktop__ivents-body">
-                            <div class="desktop__ivents-message">
-                                <div class="desktop__ivents-message-title">Проверить документ [НомерДокумента]</div>
-                                <div class="desktop__ivents-message-text">Печковский А.С назначил Вас ответственным
-                                    за....</div>
-                            </div>
-                            <div class="desktop__ivents-info">
-                                <div class="desktop__ivents-info-date">До 05.01.2021 18:00</div>
-                                <!-- Todo сделать выпадающий список из статусов -->
-                                <div class="desktop__ivents-info-status">В работе <i class='bx bx-chevron-down'></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="desktop__ivents-top-row">
-                            <div class="desktop__ivents-date">Завтра</div>
-                            <!-- ? Возможно стоит вывести выше и в отдельный блок
-                            <div class="desktop__ivents-pagination">1-5 строки из n <i class='bx bx-chevron-left' ></i><i class='bx bx-chevron-right' ></i></div> -->
-                        </div>
-                        <div class="desktop__ivents-body">
-                            <div class="desktop__ivents-message">
-                                <div class="desktop__ivents-message-title">Совещание</div>
-                                <div class="desktop__ivents-message-text">Совещание на тему ГОСТ 31.12.22</div>
-                            </div>
-                            <div class="desktop__ivents-info">
-                                <div class="desktop__ivents-info-date">Начало 10.01.2022 10:00</div>
-                                <div class="desktop__ivents-info-date">До 10.01.2022 15:00</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Todo Конец -->
-            </div>
-            <!-- ! Этот элемент можно использовать в base.html -->
-            <div class="notice">
-                <div class="notice__content">
-                    <div class="notice__title">
-                        <h4>Уведомления</h4>
-                    </div>
-                    <div class="notice__messages">
-                        <div class="notice__message">
-                            <div class="notice__message-title">
-                                <i class='bx bxs-circle notice__message_green'></i>
-                                <h5>Уведомление Утверждение</h5>
-                            </div>
-                            <div class="notice__message-body">
-                                <p>Прошу проверить и утвердить документ <b>10-03/2020-ИГИ</b></p>
-                            </div>
-                            <div class="notice__message-btns">
-                                <a href="#">Просмотреть</a> | <a href="#">Удалить</a>
-                            </div>
-                        </div>
-                        <div class="notice__message">
-                            <div class="notice__message-title">
-                                <i class='bx bxs-circle notice__message_red'></i>
-                                <h5>Уведомление Отмененно</h5>
-                            </div>
-                            <div class="notice__message-body">
-                                <p>Приложение к документу <b>10-03/2020-КР</b> просрочено</p>
-                            </div>
-                            <div class="notice__message-btns">
-                                <a href="#">Просмотреть</a> | <a href="#">Удалить</a>
-                            </div>
-                        </div>
-                        <div class="notice__message">
-                            <div class="notice__message-title">
-                                <i class='bx bxs-circle notice__message_blue'></i>
-                                <h5>Уведомление Ознакомление</h5>
-                            </div>
-                            <div class="notice__message-body">
-                                <p>Отменен документ<b>10-03/2020-ИГИ</b>. Новая инструкция № 00025 выслана. Подготовить
-                                    новые документы</p>
-                            </div>
-                            <div class="notice__message-btns">
-                                <a href="#">Просмотреть</a> | <a href="#">Удалить</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="notice__buttom-block">
-                    <a href="#">Удалить все</a>
-                    <span>1 - 3/6</span>
-                    <i class='bx bx-chevron-left'></i>
-                    <i class='bx bx-chevron-right'></i>
-                </div>
-            </div>
-            <!-- ! Конец -->
-        </main>
-    </div>
+        {% endblock %}
+
+    </main>
+</div>
 
 
-
-
-
-
-
-
-
-
-    <script type="text/javascript">
-        let arrow = document.querySelectorAll('.arrow');
-        let submenu = document.querySelectorAll('.sub-menu');
-        let sidebar = document.querySelectorAll('.sidebar-nav');
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[0].addEventListener('click', () => {
-                // console.log(submenu[0]);
-                submenu[0].classList.toggle('sub-menu_open')
-                sidebar[0].classList.toggle('sidebar-nav_close')
-
-            });
-        };
-
-
-        let close_btn = document.querySelectorAll('.sub-menu-top__list-title')
-        console.log(close_btn);
-        close_btn[0].addEventListener('click', () => {
+<script type="text/javascript">
+    let arrow = document.querySelectorAll('.arrow');
+    let submenu = document.querySelectorAll('.sub-menu');
+    let sidebar = document.querySelectorAll('.sidebar-nav');
+    for (var i = 0; i < arrow.length; i++) {
+        arrow[0].addEventListener('click', () => {
+            // console.log(submenu[0]);
             submenu[0].classList.toggle('sub-menu_open')
             sidebar[0].classList.toggle('sidebar-nav_close')
-        })
 
-        // Настройки для последнего списка
-        // Задачи
-        let tasks = document.getElementById('tasks')
-        tasks.addEventListener('click', () => {
-            let taks = document.getElementById('task')
-            task.classList.toggle('sub-menu-top__sub-list_open')
-        })
-        // Документы
-        let docs = document.getElementById('docs')
-        docs.addEventListener('click', () => {
-            let doc = document.getElementById('doc')
-            doc.classList.toggle('sub-menu-top__sub-list_open')
-        })
-        // Канцелярия
-        let chancellery = document.getElementById('chancellery')
-        chancellery.addEventListener('click', () => {
-            let chancery = document.getElementById('chancery')
-            chancery.classList.toggle('sub-menu-top__sub-list_open')
-        })
-        // Все мои задачи
-        let mytasks = document.getElementById('my_tasks')
-        mytasks.addEventListener('click', () => {
-            let mytask = document.getElementById('my_task')
-            mytask.classList.toggle('sub-menu-top__sub-list_open')
-        })
-        // Документы
-        let mydocs = document.getElementById('my_docs')
-        mydocs.addEventListener('click', () => {
-            let mydoc = document.getElementById('my_doc')
-            mydoc.classList.toggle('sub-menu-top__sub-list_open')
-        })
-        // Канцелярия
-        let my_contracts = document.getElementById('my_contracts')
-        my_contracts.addEventListener('click', () => {
-            let my_contract = document.getElementById('my_contract')
-            my_contract.classList.toggle('sub-menu-top__sub-list_open')
-        })
-    </script>
+        });
+    }
+    ;
+
+
+    let close_btn = document.querySelectorAll('.sub-menu-top__list-title')
+    console.log(close_btn);
+    close_btn[0].addEventListener('click', () => {
+        submenu[0].classList.toggle('sub-menu_open')
+        sidebar[0].classList.toggle('sidebar-nav_close')
+    })
+
+    // Настройки для последнего списка
+    // Задачи
+    let tasks = document.getElementById('tasks')
+    tasks.addEventListener('click', () => {
+        let taks = document.getElementById('task')
+        task.classList.toggle('sub-menu-top__sub-list_open')
+    })
+    // Документы
+    let docs = document.getElementById('docs')
+    docs.addEventListener('click', () => {
+        let doc = document.getElementById('doc')
+        doc.classList.toggle('sub-menu-top__sub-list_open')
+    })
+    // Канцелярия
+    let chancellery = document.getElementById('chancellery')
+    chancellery.addEventListener('click', () => {
+        let chancery = document.getElementById('chancery')
+        chancery.classList.toggle('sub-menu-top__sub-list_open')
+    })
+    // Все мои задачи
+    let mytasks = document.getElementById('my_tasks')
+    mytasks.addEventListener('click', () => {
+        let mytask = document.getElementById('my_task')
+        mytask.classList.toggle('sub-menu-top__sub-list_open')
+    })
+    // Документы
+    let mydocs = document.getElementById('my_docs')
+    mydocs.addEventListener('click', () => {
+        let mydoc = document.getElementById('my_doc')
+        mydoc.classList.toggle('sub-menu-top__sub-list_open')
+    })
+    // Канцелярия
+    let my_contracts = document.getElementById('my_contracts')
+    my_contracts.addEventListener('click', () => {
+        let my_contract = document.getElementById('my_contract')
+        my_contract.classList.toggle('sub-menu-top__sub-list_open')
+    })
+</script>
 </body>
 
 </html>
