@@ -6,5 +6,5 @@ app_name = 'user'
 
 urlpatterns = [
     path('login/', login, name='login'),
-    path('lk/', lk, name='lk')
+    # path('lk/', lk, name='lk')
 ]

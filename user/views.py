@@ -15,13 +15,14 @@ def login(request):
             user = auth.authenticate(username=email, password=password)
             if user and user.is_active:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('lk'))
+                # return HttpResponseRedirect(reverse('lk')) -- вернуть после изменений
+                return HttpResponseRedirect(reverse(''))
     else:
         form = UserLoginForm()
-    context = {'title': 'Login',
-               'form': form}
+    context = {'title': 'Login', 'form': form}
     return render(request, 'user/login.html', context)
 
 
-def lk(request):
-    return render(request, 'user/lk.html')
+# Вернуть после изменений
+# def lk(request):
+#     return render(request, 'user/lk.html')
